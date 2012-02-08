@@ -50,11 +50,11 @@ module Layer
            :String, [:uint8, SIZE_OF_ARRAY]
   end # class
   
-  # include the C functions
   attach_function :structure_to_C, [:pointer], :void
   attach_function :elapsed_time, [], :uint
   attach_function :structure_to_Ruby, [:pointer], :pointer
   attach_function :put_structure_to_Ruby, [:pointer], :void
+  
 end # module
 
 # Some examples
@@ -75,7 +75,7 @@ dT = Layer::elapsed_time
 puts "Elapsed #{dT} seconds"
 
 # Read structure from C
-p_FC = FFI::MemoryPointer.new(:pointer)
+p_FC = FFI::MemoryPointer.new(Layer::FromC)
 p_FromC = Layer::structure_to_Ruby(p_FC)
 Layer::put_structure_to_Ruby(p_FromC)
 
