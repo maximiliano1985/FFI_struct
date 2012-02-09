@@ -27,7 +27,7 @@ SIZE_OF_ARRAY = 10
 # @author cmgb
 module Layer
   extend FFI::Library
-  ffi_lib "../ext/src/clib.so"
+  ffi_lib "../ext/src/cclib.so"
   
   # Structure whose values are defined in Ruby and read in C 
   # @author cmgb
@@ -66,7 +66,10 @@ mp_ToC = FFI::MemoryPointer.new(Layer::ToC)
 p_ToC  = Layer::ToC.new(mp_ToC)
 p_ToC[:par1] = 1234.5
 p_ToC[:par2] = 0.5
-Layer::structure_to_C(p_ToC)
+1000.times do|i|
+  p i
+  Layer::structure_to_C(p_ToC)
+end
 
 #================================================================
 
